@@ -51,11 +51,11 @@ export default function PhotoGallery() {
   const totalSlides = Math.ceil(photos.length / photosPerSlide);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
   };
 
   useEffect(() => {

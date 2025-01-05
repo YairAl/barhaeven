@@ -26,8 +26,10 @@ export default function Hero() {
           <b>בכל ערב פעילות יש הופעות חיות:</b> מהרכבים מוזיקליים של תיכון הדסים
           ועד די-ג&apos;יים מאבן יהודה שיעשו אווירה.
         </p>
-        <Button size="lg" className=" font-bold py-3 px-6 rounded-full text-lg">
-          לקניית כרטיסייה
+        <Button className="font-bold py-3 px-6 rounded-full text-lg" asChild>
+          <a href="https://www.stampme.com/" target="_blank">
+            לרכישת כרטיסייה
+          </a>
         </Button>
       </div>
     </section>
