@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { IMAGE_ROOT } from "@/config";
 
 const photos = [
   {
@@ -98,7 +99,7 @@ export default function PhotoGallery() {
                         className="relative w-full h-full rounded-lg overflow-hidden shadow-xl"
                       >
                         <Image
-                          src={photo.src}
+                          src={IMAGE_ROOT + photo.src}
                           alt={photo.alt}
                           fill
                           className="object-cover transition-transform duration-500 hover:scale-110"

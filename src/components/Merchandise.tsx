@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { IMAGE_ROOT } from "@/config";
 
 const products = [
   {
@@ -39,7 +40,7 @@ export default function Merchandise() {
                 className="bg-white rounded-lg overflow-hidden shadow-lg flex flex-col items-center text-center p-6 space-y-4"
               >
                 <Image
-                  src={product.image}
+                  src={IMAGE_ROOT + product.image}
                   alt={product.name}
                   width={300}
                   height={300}

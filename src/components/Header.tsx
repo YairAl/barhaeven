@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { IMAGE_ROOT } from "@/config";
 
 type NavigationItem = {
   href: string;
@@ -31,7 +32,7 @@ export default function Header() {
           <div className="flex-shrink-0">
             <Link href="/" className="text-2xl font-bold">
               <Image
-                src="/logo.png"
+                src={IMAGE_ROOT + "/logo.png"}
                 alt="Bar HaEven Logo"
                 width={51.1}
                 height={48.8}

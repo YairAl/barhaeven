@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { IMAGE_ROOT } from "@/config";
 
 export default function Hero() {
   return (
@@ -7,7 +8,7 @@ export default function Hero() {
       <div className="container mx-auto px-4">
         <div className="mb-8">
           <Image
-            src="/logo.png"
+            src={IMAGE_ROOT + "/logo.png"}
             alt="Bar HaEven Logo"
             width={204.4}
             height={195.2}
