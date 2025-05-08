@@ -11,7 +11,7 @@ const features = [
   },
   {
     icon: <Music className="size-10 text-amber-600" />,
-    title: "הופעות כל שבוע של מוזיקאים מקומיים",
+    title: "אירועים כל שבוע של מוזיקאים מקומיים",
   },
 ];
 
