@@ -1,34 +1,36 @@
 import Image from "next/image";
 import { IMAGE_ROOT } from "@/config";
-import { galleryPhotos } from "@/content";
+import { photos } from "@/content";
 
-// First and fourth photos span two rows to give the grid some rhythm.
-const featured = new Set([0, 3]);
+const tilts = ["-rotate-2", "rotate-1", "-rotate-1", "rotate-2"];
 
 export default function Gallery() {
-  return (
-    <section id="gallery" className="bg-cream py-24">
-      <div className="container mx-auto px-4">
-        <span className="section-kicker">רגעים מהבר</span>
-        <h2 className="section-title mb-12">גלריה</h2>
+  if (photos.length === 0) return null;
 
-        <div className="grid auto-rows-[11rem] grid-cols-2 gap-3 md:auto-rows-[14rem] md:grid-cols-3 md:gap-4">
-          {galleryPhotos.map((photo, i) => (
-            <div
+  return (
+    <section id="gallery" className="bg-foam py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 md:px-8">
+        <h2 className="poster mb-12 text-[clamp(5rem,16vw,11rem)]">מהשישי האחרון</h2>
+        <div className="grid grid-cols-2 gap-5 md:grid-cols-3 md:gap-8">
+          {photos.map((photo, i) => (
+            <figure
               key={photo.src}
-              className={`group relative overflow-hidden rounded-xl shadow-md ${
-                featured.has(i) ? "row-span-2" : ""
-              }`}
+              className={`${tilts[i % tilts.length]} border-[3px] border-ink bg-foam p-2 pb-3 shadow-[5px_5px_0_theme(colors.ink)] transition-transform hover:rotate-0`}
             >
-              <Image
-                src={IMAGE_ROOT + photo.src}
-                alt={photo.alt}
-                fill
-                sizes="(min-width: 768px) 33vw, 50vw"
-                className="object-cover transition duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-espresso/0 transition group-hover:bg-espresso/10" />
-            </div>
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <Image
+                  src={IMAGE_ROOT + photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="(min-width: 768px) 33vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="mt-2 text-sm font-medium">
+                {photo.alt}
+                {photo.credit && <span className="text-stout"> · צילום: {photo.credit}</span>}
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>

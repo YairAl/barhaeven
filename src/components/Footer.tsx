@@ -1,10 +1,8 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-cream/10 bg-espresso py-6 text-center text-sm text-cream/60">
-      <p>
-        &copy; {new Date().getFullYear()} בר האבן · הבר הקהילתי של אבן יהודה ·
-        שתו באחריות
-      </p>
+    <footer className="border-t-[3px] border-ink bg-amber px-4 py-4 text-center font-bold">
+      &copy; {new Date().getFullYear()} בר האבן · הבר הקהילתי של אבן יהודה · שתו
+      באחריות
     </footer>
   );
 }

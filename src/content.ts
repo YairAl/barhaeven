@@ -19,26 +19,17 @@ export const contact = {
 
 export type Photo = { src: string; alt: string; credit?: string };
 
-// Photos of Even Yehuda (e.g. from the local council's sites).
-// Drop the files in public/even-yehuda/ and list them here — the
-// "אבן יהודה" section shows a photo strip only when this list is non-empty.
-export const evenYehudaPhotos: Photo[] = [];
-
-export const galleryPhotos: Photo[] = [
-  { src: "/people_1.jpg", alt: "חברים מרימים כוסית בבר" },
-  { src: "/live_music_1.jpg", alt: "הופעה חיה בבר" },
-  { src: "/outdoor_bar_1.jpg", alt: "עמדת הבר בחוץ" },
-  { src: "/live_music_2.jpg", alt: "הופעה חיה" },
-  { src: "/people_2.jpg", alt: "אנשים שותים בבר" },
-  { src: "/outdoor_bar_2.jpg", alt: "משאית הבר" },
-];
+// Real photos of the bar / of Even Yehuda. Put the files in public/photos/
+// and list them here, e.g. { src: "/photos/stage.jpg", alt: "הופעה בבר" }.
+// The gallery section appears only when this list is non-empty.
+export const photos: Photo[] = [];
 
 export const events = [
-  { date: "4.4", day: "שישי", artist: "Cortado", genre: "טכנו" },
-  { date: "11.4", day: "שישי", artist: "The Cohen Quintet", genre: "ג'אז" },
-  { date: "18.4", day: "שישי", artist: "בן אורי", genre: "R&B" },
-  { date: "25.4", day: "שישי", artist: "הרכב תיכון הדסים", genre: "רוק ישראלי" },
-  { date: "2.5", day: "שישי", artist: "דונגי", genre: "ראפ" },
+  { date: "4.4", artist: "Cortado", genre: "טכנו" },
+  { date: "11.4", artist: "The Cohen Quintet", genre: "ג'אז" },
+  { date: "18.4", artist: "בן אורי", genre: "R&B" },
+  { date: "25.4", artist: "הרכב תיכון הדסים", genre: "רוק ישראלי" },
+  { date: "2.5", artist: "דונגי", genre: "ראפ" },
 ];
 
 export const products = [
