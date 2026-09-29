@@ -9,27 +9,26 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        // Palette taken from the sepia logo
-        cream: "#f8f0df",
-        espresso: "#2a1c13",
-        ink: "#5a3b25",
-        brass: "#b8741a",
-        foam: "#fffaf0",
+        // Gig-poster palette: a pint held up to the light.
+        amber: { DEFAULT: "#f3a712", deep: "#d98a00" },
+        ink: "#1a110b",
+        stout: "#3b2415",
+        foam: "#fff6e3",
+        stamp: "#e0431c",
       },
       fontFamily: {
-        sans: ["var(--font-assistant)", "sans-serif"],
-        display: ["var(--font-frank)", "serif"],
+        poster: ["var(--font-karantina)", "Impact", "sans-serif"],
+        sans: ["var(--font-rubik)", "system-ui", "sans-serif"],
+        lex: ["var(--font-frank)", "Georgia", "serif"],
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+      keyframes: {
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(50%)" },
+        },
+      },
+      animation: {
+        marquee: "marquee 28s linear infinite",
       },
     },
   },

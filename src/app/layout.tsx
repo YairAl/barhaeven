@@ -1,16 +1,22 @@
 import type { Metadata } from "next";
-import { Assistant, Frank_Ruhl_Libre } from "next/font/google";
+import { Frank_Ruhl_Libre, Karantina, Rubik } from "next/font/google";
 import "./globals.css";
 
-const assistant = Assistant({
-  variable: "--font-assistant",
+const karantina = Karantina({
+  variable: "--font-karantina",
+  subsets: ["latin", "hebrew"],
+  weight: ["400", "700"],
+});
+
+const rubik = Rubik({
+  variable: "--font-rubik",
   subsets: ["latin", "hebrew"],
 });
 
 const frank = Frank_Ruhl_Libre({
   variable: "--font-frank",
   subsets: ["latin", "hebrew"],
-  weight: ["500", "700", "900"],
+  weight: ["400", "700", "900"],
 });
 
 export const metadata: Metadata = {
@@ -26,7 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="he" dir="rtl">
-      <body className={`${assistant.variable} ${frank.variable} antialiased`}>
+      <body
+        className={`${karantina.variable} ${rubik.variable} ${frank.variable} antialiased`}
+      >
         {children}
       </body>
     </html>

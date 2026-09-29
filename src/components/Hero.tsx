@@ -1,84 +1,94 @@
 import Image from "next/image";
-import { CalendarDays, Clock, MapPin } from "lucide-react";
 import { IMAGE_ROOT } from "@/config";
 import { MAPS_URL, TICKETS_URL, hours } from "@/content";
 
+const ticker = [
+  "כל שישי",
+  hours.time,
+  "הופעות חיות",
+  "בירה במחיר של שכר חייל",
+  "רח' ההדרים",
+  "תשתו בירה, יהיה בסדר!",
+];
+
 export default function Hero() {
   return (
-    <section
-      id="top"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-espresso text-cream"
-    >
-      <Image
-        src={IMAGE_ROOT + "/live_music_1.jpg"}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover opacity-45 sepia-[.35]"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-espresso via-espresso/60 to-espresso/30" />
-      <div className="grain absolute inset-0" />
+    <section id="top" className="relative overflow-hidden bg-amber">
+      <div className="bubbles pointer-events-none absolute inset-0" aria-hidden />
 
-      <div className="container relative mx-auto px-4 pb-16 pt-28 text-center">
-        <div className="mx-auto mb-8 grid size-48 place-items-center rounded-full bg-cream shadow-2xl ring-4 ring-brass/60 md:size-60">
-          <Image
-            src={IMAGE_ROOT + "/logo.png"}
-            alt="הלוגו של בר האבן"
-            width={204}
-            height={195}
-            priority
-            className="w-36 md:w-44"
-          />
-        </div>
-
-        <p className="mb-3 text-sm font-semibold tracking-wide text-brass">
-          הבר הקהילתי של אבן יהודה
-        </p>
-        <h1 className="mb-5 text-6xl font-black leading-none md:text-8xl">
-          בר האבן
-        </h1>
-        <p className="mx-auto mb-10 max-w-xl text-xl text-cream/85 md:text-2xl">
-          תשתו בירה, יהיה בסדר! מקום לחזור אליו בסוף השבוע – עם החבר&apos;ה,
-          מוזיקה חיה ובירה במחיר של שכר חייל.
-        </p>
-
-        <div className="mb-12 flex flex-wrap justify-center gap-4">
-          <a
-            href={TICKETS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full bg-brass px-8 py-3.5 text-lg font-bold text-foam shadow-lg transition hover:-translate-y-0.5 hover:bg-brass/90"
-          >
-            לרכישת כרטיסייה
-          </a>
-          <a
-            href="#events"
-            className="rounded-full border-2 border-cream/70 px-8 py-3 text-lg font-bold transition hover:bg-cream hover:text-espresso"
-          >
-            מי מופיע השבוע?
-          </a>
-        </div>
-
-        <ul className="mx-auto flex max-w-3xl flex-wrap justify-center gap-x-8 gap-y-3 text-cream/90">
-          <li className="flex items-center gap-2">
-            <CalendarDays className="size-5 text-brass" /> {hours.day}
-          </li>
-          <li className="flex items-center gap-2">
-            <Clock className="size-5 text-brass" />
-            <span dir="ltr">{hours.time}</span>
-          </li>
-          <li>
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-10 md:px-8 lg:grid-cols-[1.15fr_1fr] lg:pb-24 lg:pt-14">
+        <div>
+          <p className="mb-4 inline-block -rotate-2 bg-ink px-3 py-1 text-lg font-bold text-amber">
+            הבר הקהילתי של אבן יהודה
+          </p>
+          <h1 className="poster text-[clamp(7.5rem,30vw,20rem)]">
+            <span className="block">בר</span>
+            <span className="block text-foam [-webkit-text-stroke:3px_theme(colors.ink)] [paint-order:stroke_fill]">
+              האבן
+            </span>
+          </h1>
+          <p className="mt-6 max-w-md text-xl font-medium leading-relaxed md:text-2xl">
+            בסוף השבוע כולם חוזרים הביתה. אנחנו דואגים שיהיה לאן לרדת: מוזיקה
+            חיה, בירה זולה והחבר&apos;ה שגדלתם איתם.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-4">
             <a
-              href={MAPS_URL}
+              href={TICKETS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 underline-offset-4 hover:underline"
+              className="btn bg-ink text-amber"
             >
-              <MapPin className="size-5 text-brass" /> {hours.address}
+              לרכישת כרטיסייה
             </a>
-          </li>
-        </ul>
+            <a href="#events" className="btn bg-foam">
+              מי מופיע השבוע?
+            </a>
+          </div>
+        </div>
+
+        <div className="relative mx-auto w-full max-w-[26rem] lg:max-w-[30rem]">
+          <div className="sticker relative aspect-square rotate-[-5deg] p-[12%] transition-transform duration-300 hover:rotate-0">
+            <Image
+              src={IMAGE_ROOT + "/logo.png"}
+              alt="הלוגו של בר האבן: אליעזר בן־יהודה מרים בירה"
+              width={511}
+              height={488}
+              priority
+              className="size-full object-contain"
+            />
+          </div>
+
+          <a
+            href={MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute -bottom-4 -start-2 grid size-32 rotate-12 place-items-center rounded-full bg-stamp text-center text-foam shadow-[4px_5px_0_theme(colors.ink)] transition-transform hover:rotate-0 md:size-40"
+          >
+            <span className="grid size-[86%] place-items-center rounded-full border-2 border-dashed border-foam/80">
+              <span>
+                <span className="poster block text-4xl md:text-5xl">שישי</span>
+                <span dir="ltr" className="block text-sm font-bold md:text-base">
+                  {hours.time}
+                </span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div className="relative -mx-4 -rotate-1 overflow-hidden border-y-[3px] border-ink bg-ink py-3 text-amber">
+        <div className="flex w-max animate-marquee">
+          {[0, 1].map((copy) => (
+            <ul key={copy} className="flex shrink-0" aria-hidden={copy === 1}>
+              {[...ticker, ...ticker].map((item, i) => (
+                <li key={i} className="poster flex items-center whitespace-nowrap px-6 text-4xl">
+                  {item}
+                  <span className="ps-12 text-foam">✺</span>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
       </div>
     </section>
   );

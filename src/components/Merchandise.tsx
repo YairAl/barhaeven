@@ -4,42 +4,51 @@ import { contact, products } from "@/content";
 
 export default function Merchandise() {
   return (
-    <section id="merchandise" className="py-24">
-      <div className="container mx-auto px-4">
-        <span className="section-kicker">לאבן־יהודי הפטריוט</span>
-        <h2 className="section-title mb-12">מרצ&apos;נדייז</h2>
+    <section id="merch" className="relative overflow-hidden bg-amber py-20 md:py-28">
+      <div className="halftone pointer-events-none absolute inset-y-0 start-0 w-1/3 text-ink/10" aria-hidden />
 
-        <div className="mx-auto grid max-w-5xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => (
-            <div
+      <div className="relative mx-auto max-w-7xl px-4 md:px-8">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+          <h2 className="poster text-[clamp(5rem,16vw,11rem)]">מרצ&apos;</h2>
+          <p className="max-w-xs text-lg font-medium">
+            לאבן־יהודי הפטריוט. אפשר להזמין כאן או לקנות בבר, בכל שישי.
+          </p>
+        </div>
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((product, i) => (
+            <article
               key={product.name}
-              className="flex flex-col items-center rounded-2xl bg-foam p-6 text-center shadow-sm ring-1 ring-ink/10 transition hover:-translate-y-1 hover:shadow-lg"
+              className="relative flex flex-col rounded-3xl border-[3px] border-ink bg-foam p-6 shadow-[6px_6px_0_theme(colors.ink)]"
             >
+              <span
+                className={`absolute -top-5 end-5 grid size-20 place-items-center rounded-full bg-stamp text-foam shadow-[3px_3px_0_theme(colors.ink)] ${
+                  i % 2 ? "rotate-6" : "-rotate-6"
+                }`}
+              >
+                <span className="poster text-4xl">₪{product.price}</span>
+              </span>
               <Image
                 src={IMAGE_ROOT + product.image}
                 alt={product.name}
-                width={260}
-                height={260}
-                className="mb-4 aspect-square w-full max-w-[260px] object-contain"
+                width={300}
+                height={300}
+                className="mx-auto aspect-square w-full max-w-[16rem] object-contain"
               />
-              <h3 className="text-xl font-bold">{product.name}</h3>
-              <p className="mb-5 mt-1 font-display text-2xl font-black text-brass">
-                ₪{product.price}
-              </p>
-              <a
-                href={`mailto:${contact.email}?subject=${encodeURIComponent(
-                  "הזמנת " + product.name
-                )}`}
-                className="w-full rounded-full bg-espresso py-2.5 font-bold text-cream transition hover:bg-ink"
-              >
-                להזמנה
-              </a>
-            </div>
+              <div className="mt-4 flex items-center justify-between gap-4">
+                <h3 className="poster text-5xl">{product.name}</h3>
+                <a
+                  href={`mailto:${contact.email}?subject=${encodeURIComponent(
+                    "הזמנת " + product.name
+                  )}`}
+                  className="btn shrink-0 bg-ink px-5 py-2 text-base text-amber"
+                >
+                  להזמנה
+                </a>
+              </div>
+            </article>
           ))}
         </div>
-        <p className="mt-6 text-center text-sm text-ink/70">
-          ניתן לקנות גם בבר, בכל שישי.
-        </p>
       </div>
     </section>
   );

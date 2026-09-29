@@ -3,38 +3,87 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 42 62% 93%;
-    --foreground: 24 38% 18%;
-    --primary: 32 75% 40%;
-    --primary-foreground: 42 62% 95%;
-    --radius: 0.75rem;
-  }
-
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 4.5rem;
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-foam font-sans text-ink;
   }
 
   h1,
   h2,
   h3 {
-    @apply font-display;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 3px solid theme("colors.stamp");
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
   }
 }
 
 @layer components {
-  .section-title {
-    @apply text-4xl md:text-5xl font-bold text-center mb-4;
+  /* Huge condensed poster headline */
+  .poster {
+    @apply font-poster font-bold leading-[0.78] tracking-tight;
   }
-  .section-kicker {
-    @apply block text-center text-sm font-semibold tracking-wide text-brass mb-3;
+
+  /* Die-cut sticker: foam border + hard offset shadow */
+  .sticker {
+    @apply rounded-full bg-foam ring-[6px] ring-foam;
+    box-shadow: 6px 8px 0 theme("colors.ink");
   }
-  .grain {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-[3px] border-ink px-7 py-3 text-lg font-bold transition-transform duration-150;
+    box-shadow: 4px 4px 0 theme("colors.ink");
+  }
+  .btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 theme("colors.ink");
+  }
+  .btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 theme("colors.ink");
+  }
+
+  /* Printed halftone dots */
+  .halftone {
+    background-image: radial-gradient(currentColor 1.2px, transparent 1.4px);
+    background-size: 9px 9px;
+  }
+
+  /* Rising bubbles in the hero */
+  .bubbles {
+    background-image: radial-gradient(circle at 20% 80%, #fff6e355 0 6px, transparent 7px),
+      radial-gradient(circle at 70% 30%, #fff6e344 0 4px, transparent 5px),
+      radial-gradient(circle at 45% 55%, #fff6e333 0 9px, transparent 10px),
+      radial-gradient(circle at 85% 75%, #fff6e344 0 5px, transparent 6px),
+      radial-gradient(circle at 10% 25%, #fff6e333 0 3px, transparent 4px);
+    background-size: 340px 420px;
+    animation: rise 14s linear infinite;
+  }
+}
+
+@keyframes rise {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -420px;
   }
 }
