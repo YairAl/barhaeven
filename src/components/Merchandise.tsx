@@ -1,66 +1,45 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { IMAGE_ROOT } from "@/config";
-
-const products = [
-  {
-    name: "חולצה קצרה - בר האבן",
-    price: 25,
-    image: "/long_sleeve_t_with_logo.png",
-  },
-  {
-    name: "חולצה ארוכה - בר האבן",
-    price: 30,
-    image: "/short_sleeve_t_with_logo.png",
-  },
-  {
-    name: "כוס שותים - בר האבן",
-    price: 20,
-    image: "/shot_glass_with_logo.png",
-  },
-  // {
-  //   name: "דגל - בר האבן",
-  //   price: 15,
-  //   image: "/flag_with_logo.png",
-  // },
-];
+import { contact, products } from "@/content";
 
 export default function Merchandise() {
   return (
-    <section className="py-20 bg-background">
+    <section id="merchandise" className="py-24">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-12 text-center">
-          מרצ&apos;נדייז לאבן יהודי הפטריוט
-        </h2>
-        <div className="flex justify-center items-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-lg overflow-hidden shadow-lg flex flex-col items-center text-center p-6 space-y-4"
+        <span className="section-kicker">לאבן־יהודי הפטריוט</span>
+        <h2 className="section-title mb-12">מרצ&apos;נדייז</h2>
+
+        <div className="mx-auto grid max-w-5xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((product) => (
+            <div
+              key={product.name}
+              className="flex flex-col items-center rounded-2xl bg-foam p-6 text-center shadow-sm ring-1 ring-ink/10 transition hover:-translate-y-1 hover:shadow-lg"
+            >
+              <Image
+                src={IMAGE_ROOT + product.image}
+                alt={product.name}
+                width={260}
+                height={260}
+                className="mb-4 aspect-square w-full max-w-[260px] object-contain"
+              />
+              <h3 className="text-xl font-bold">{product.name}</h3>
+              <p className="mb-5 mt-1 font-display text-2xl font-black text-brass">
+                ₪{product.price}
+              </p>
+              <a
+                href={`mailto:${contact.email}?subject=${encodeURIComponent(
+                  "הזמנת " + product.name
+                )}`}
+                className="w-full rounded-full bg-espresso py-2.5 font-bold text-cream transition hover:bg-ink"
               >
-                <Image
-                  src={IMAGE_ROOT + product.image}
-                  alt={product.name}
-                  width={300}
-                  height={300}
-                  className="w-full object-contain"
-                />
-                <div className="p-4">
-                  <h3 className="text-foreground font-semibold mb-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-foreground font-bold mb-4">
-                    ${product.price}
-                  </p>
-                  <Button className="w-full bg-amber-600 hover:bg-primary/80 text-gray-100">
-                    הוסף לסל
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
+                להזמנה
+              </a>
+            </div>
+          ))}
         </div>
+        <p className="mt-6 text-center text-sm text-ink/70">
+          ניתן לקנות גם בבר, בכל שישי.
+        </p>
       </div>
     </section>
   );
