@@ -1,33 +1,25 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Features from "@/components/Features";
-import PerformanceSchedule from "@/components/PerformanceSchedule";
-import PhotoGallery from "@/components/PhotoGallery";
+import About from "@/components/About";
+import EvenYehuda from "@/components/EvenYehuda";
+import Events from "@/components/Events";
+import Gallery from "@/components/Gallery";
 import Merchandise from "@/components/Merchandise";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import ContactUs from "@/components/ContactUs";
 
 export default function Home() {
   return (
-    <div id="page" className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Header />
       <main>
         <Hero />
-        <section id="features">
-          <Features />
-        </section>
-        <section id="gallery">
-          <PhotoGallery />
-        </section>
-        <section id="performance-schedule">
-          <PerformanceSchedule />
-        </section>
-        <section id="merchandise">
-          <Merchandise />
-        </section>
-        <section id="contact-us">
-          <ContactUs />
-        </section>
+        <About />
+        <EvenYehuda />
+        <Events />
+        <Gallery />
+        <Merchandise />
+        <Contact />
       </main>
       <Footer />
     </div>

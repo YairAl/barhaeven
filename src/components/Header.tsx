@@ -1,102 +1,107 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { IMAGE_ROOT } from "@/config";
+import { TICKETS_URL } from "@/content";
 
-type NavigationItem = {
-  href: string;
-  label: string;
-  external?: boolean;
-};
-
-const navigationItems: NavigationItem[] = [
-  { href: "#page", label: "הסיפור שלנו" },
+const navigationItems = [
+  { href: "#about", label: "הסיפור שלנו" },
+  { href: "#even-yehuda", label: "אבן יהודה" },
+  { href: "#events", label: "הופעות" },
   { href: "#gallery", label: "גלריה" },
-  { href: "#performance-schedule", label: "הופעות" },
   { href: "#merchandise", label: "מרצ'נדייז" },
-  { href: "https://www.stampme.com/", label: "כרטיסיות", external: true },
-  { href: "#contact-us", label: "צור קשר" },
+  { href: "#contact", label: "צור קשר" },
 ];
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const solid = scrolled || isMenuOpen;
 
   return (
-    <header className="bg-background py-4 sticky top-0 z-50 border-b-2 border-amber-600 shadow-lg">
-      <nav className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="text-2xl font-bold">
-              <Image
-                src={IMAGE_ROOT + "/logo.png"}
-                alt="Bar HaEven Logo"
-                width={51.1}
-                height={48.8}
-                priority
-              />
-            </Link>
-          </div>
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        solid
+          ? "bg-espresso/95 backdrop-blur shadow-lg"
+          : "bg-gradient-to-b from-black/60 to-transparent"
+      }`}
+    >
+      <nav className="container mx-auto flex items-center justify-between gap-4 px-4 py-3 text-cream">
+        <a href="#top" className="flex items-center gap-3" aria-label="בר האבן – לראש העמוד">
+          <span className="grid size-11 place-items-center rounded-full bg-cream">
+            <Image
+              src={IMAGE_ROOT + "/logo.png"}
+              alt=""
+              width={36}
+              height={34}
+              priority
+            />
+          </span>
+          <span className="font-display text-xl font-bold">בר האבן</span>
+        </a>
 
-          <div className="md:hidden flex-shrink-0">
-            <h3 className="font-bold">תשתו בירה, יהיה בסדר!</h3>
-          </div>
+        <ul className="hidden items-center gap-7 lg:flex">
+          {navigationItems.map((item) => (
+            <li key={item.href}>
+              <a
+                href={item.href}
+                className="font-medium transition-colors hover:text-brass"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-md hover:bg-amber-100"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+        <a
+          href={TICKETS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden rounded-full bg-brass px-5 py-2 font-bold text-foam transition hover:bg-brass/85 lg:inline-block"
+        >
+          כרטיסייה
+        </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex justify-center flex-1">
-            <ul
-              className="flex gap-8 items-center justify-center w-full"
-              dir="rtl"
-            >
-              {navigationItems.map((item) => {
-                const ElementToRender = item.external ? "a" : Link;
-                return (
-                  <li key={item.href}>
-                    <ElementToRender
-                      href={item.href}
-                      target={item.external ? "_blank" : undefined}
-                      className="text-lg font-medium hover:text-amber-600 transition-colors"
-                    >
-                      {item.label}
-                    </ElementToRender>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4">
-            <ul className="flex flex-col gap-4" dir="rtl">
-              {navigationItems.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-lg font-medium hover:text-amber-600 block py-2"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="rounded-md p-2 hover:bg-white/10 lg:hidden"
+          aria-label={isMenuOpen ? "סגירת תפריט" : "פתיחת תפריט"}
+          aria-expanded={isMenuOpen}
+        >
+          {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
+        </button>
       </nav>
+
+      {isMenuOpen && (
+        <ul className="container mx-auto flex flex-col gap-1 px-4 pb-4 text-cream lg:hidden">
+          {[...navigationItems, { href: TICKETS_URL, label: "לרכישת כרטיסייה" }].map(
+            (item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className="block rounded-md px-2 py-3 text-lg font-medium hover:bg-white/10"
+                  onClick={() => setIsMenuOpen(false)}
+                  {...(item.href.startsWith("http")
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                >
+                  {item.label}
+                </a>
+              </li>
+            )
+          )}
+        </ul>
+      )}
     </header>
   );
 }
